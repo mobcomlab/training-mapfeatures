@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mobcomlab.mapfeatures.LayerActivity;
+import com.mobcomlab.mapfeatures.MapActivity;
 import com.mobcomlab.mapfeatures.R;
 import com.mobcomlab.mapfeatures.models.Layer;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.ViewHolder> {
@@ -58,7 +57,7 @@ public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.ViewHolder> 
             @Override
             public void onClick(final View view) {
                 // Launch detail activity
-                final Intent intent = new Intent(context, LayerActivity.class);
+                final Intent intent = new Intent(context, MapActivity.class);
                 intent.putExtra("layerId", layer.getId());
                 context.startActivity(intent);
             }
