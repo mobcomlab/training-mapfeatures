@@ -81,6 +81,14 @@ public class SimpleMapOverlayActivity extends AppCompatActivity implements OnMap
         line1.add(new LatLng(16.607476, 99.967398));
         line1.add(new LatLng(16.606941, 99.961776));
         map.addPolyline(line1);
+
+        PolylineOptions line2 = new PolylineOptions();
+        line2.color(Color.YELLOW);
+        line2.width(2.f);
+        line2.add(new LatLng(16.613254, 99.957034));
+        line2.add(new LatLng(16.613007, 99.961325));
+        line2.add(new LatLng(16.612328, 99.964823));
+        map.addPolyline(line2);
     }
 
     private void addPolygone() {
@@ -91,9 +99,19 @@ public class SimpleMapOverlayActivity extends AppCompatActivity implements OnMap
         shape1.add(new LatLng(16.610231, 99.954909));
         shape1.add(new LatLng(16.608216, 99.958278));
         shape1.add(new LatLng(16.607270, 99.954416));
-//        shape1.add(new LatLng(16.610231, 99.954909));
+        shape1.add(new LatLng(16.610231, 99.954909));
         map.addPolygon(shape1);
 
+        PolygonOptions shape2 = new PolygonOptions();
+        shape2.strokeColor(Color.GREEN);
+        shape2.strokeWidth(2.f);
+        shape2.fillColor(Color.argb(100, 0, 255, 0));
+        shape2.add(new LatLng(16.613624, 99.958750));
+        shape2.add(new LatLng(16.610642, 99.966089));
+        shape2.add(new LatLng(16.611424, 99.968406));
+        shape2.add(new LatLng(16.610087, 99.968664));
+        shape2.add(new LatLng(16.607352, 99.963643));
+        map.addPolygon(shape2);
     }
 
 }
