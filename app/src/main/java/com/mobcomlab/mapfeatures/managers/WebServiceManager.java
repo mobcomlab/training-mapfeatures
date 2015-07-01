@@ -86,7 +86,7 @@ public class WebServiceManager {
                 for (int j = 0; j < coordinatesRaw.length(); j++) {
                     JSONArray coordRaw = coordinatesRaw.getJSONArray(j);
                     if (coordRaw.length() == 2) {
-                        coordinates.add(new Pair<>(coordRaw.getDouble(0), coordRaw.getDouble(1)));
+                        coordinates.add(new Pair<>(coordRaw.getDouble(1), coordRaw.getDouble(0)));
                     }
                 }
 
