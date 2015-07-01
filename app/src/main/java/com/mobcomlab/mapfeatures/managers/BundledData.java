@@ -46,29 +46,32 @@ public class BundledData {
             layer1.getFeatures().add(f2);
             layer1.getFeatures().add(f3);*/
 
-            Layer layer2 = realm.createObject(Layer.class);
+            /*Layer layer2 = realm.createObject(Layer.class);
             layer2.setId("gistck:river pue");
             layer2.setName("Rivers");
 
             Layer layer3 = realm.createObject(Layer.class);
             layer3.setId("gistck:landmap pue");
-            layer3.setName("Landmap");
+            layer3.setName("Landmap");*/
 
 
             // Points
             Layer pointsLayer = realm.createObject(Layer.class);
             pointsLayer.setId("plkwater:_pl_adddata");
             pointsLayer.setName("แหล่งน้ำที่เพิ่มเติมจากหน่วยงาน");
+            pointsLayer.setFeatureType("Point");
 
             // Polylines
-            Layer polylinesLayer = realm.createObject(Layer.class);
-            polylinesLayer.setId("plkwater:_pl_stream");
-            polylinesLayer.setName("เส้นลำน้ำ");
+            Layer polylineLayer = realm.createObject(Layer.class);
+            polylineLayer.setId("plkwater:_pl_stream");
+            polylineLayer.setName("เส้นลำน้ำ");
+            polylineLayer.setFeatureType("MultiLineString");
 
             // Polygone
             Layer polygoneLayer = realm.createObject(Layer.class);
             polygoneLayer.setId("plkwater:_pl_altercrop");
             polygoneLayer.setName("พื้นที่เหมาะสมปลูกข้าวและพืชทางเลือกในพื้นที่นาข้าว");
+            polygoneLayer.setFeatureType("MultiPolygon");
 
             // Commit update realm
             realm.commitTransaction();
