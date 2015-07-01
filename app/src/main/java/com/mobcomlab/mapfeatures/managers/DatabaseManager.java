@@ -1,4 +1,4 @@
-package com.mobcomlab.mapfeatures.dataaccess;
+package com.mobcomlab.mapfeatures.managers;
 
 import android.content.Context;
 
@@ -8,7 +8,6 @@ import com.mobcomlab.mapfeatures.models.Layer;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class DatabaseManager {
 
@@ -22,9 +21,12 @@ public class DatabaseManager {
         return Realm.getInstance(context).where(Layer.class).findAll();
     }
 
+    public Layer getLayer(String id) {
+        return Realm.getInstance(context).where(Layer.class).equalTo("id", id).findFirst();
+    }
+
     public List<Feature> getFeatures(String layerID) {
-        Layer layer = Realm.getInstance(context).where(Layer.class).equalTo("id", layerID).findFirst();
-        return layer.getFeatures();
+        return getLayer(layerID).getFeatures();
     }
 
 }
