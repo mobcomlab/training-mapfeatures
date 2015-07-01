@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Layer> layers;
 
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +31,17 @@ public class MainActivity extends AppCompatActivity {
 
         layers = new DatabaseManager(this).getLayers();
 
-        final RecyclerView samples = (RecyclerView) findViewById(R.id.recycler_view);
-        samples.setLayoutManager(new LinearLayoutManager(this));
-        samples.setAdapter(new LayerAdapter(this, layers));
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new LayerAdapter(this, layers));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        recyclerView.getAdapter().notifyDataSetChanged();
+
     }
 
     @Override
@@ -48,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add_layer) {
+            Intent intent = new Intent(this, LayerEditActivity.class);
+            startActivity(intent);
             return true;
         } else if (id == R.id.action_simple_map_overlay) {
             startActivity(new Intent(this, SimpleMapOverlayActivity.class));
