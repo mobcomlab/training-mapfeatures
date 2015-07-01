@@ -1,9 +1,12 @@
 package com.mobcomlab.mapfeatures.managers;
 
 import android.content.Context;
+import android.util.Pair;
 
 import com.mobcomlab.mapfeatures.models.Feature;
 import com.mobcomlab.mapfeatures.models.Layer;
+
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class DatabaseManager {
         return Realm.getInstance(context).where(Layer.class).equalTo("id", id).findFirst();
     }
 
-    public void updateLayer(String id, String name) {
+    public Layer createOrUpdateLayer(String id, String name) {
         Layer layer = getLayer(id);
 
         Realm realm = Realm.getInstance(context);
@@ -39,10 +42,41 @@ public class DatabaseManager {
         layer.setName(name);
 
         realm.commitTransaction();
+
+        return layer;
+    }
+
+    public Feature createOrUpdateFeature(String id, String geometryType, List<Pair<Double,Double>> coordinates) {
+        Realm realm = Realm.getInstance(context);
+
+        Feature feature = realm.where(Feature.class).equalTo("id", id).findFirst();
+
+        realm.beginTransaction();
+        if (feature == null) {
+            feature = realm.createObject(Feature.class);
+        }
+
+        feature.setId(id);
+
+
+
+        realm.commitTransaction();
+
+        return feature;
     }
 
     public List<Feature> getFeatures(String layerID) {
         return getLayer(layerID).getFeatures();
+    }
+
+    public void setFeatures(String layerID, List<Feature> features) {
+        Layer layer = getLayer(layerID);
+
+        Realm realm = Realm.getInstance(context);
+        realm.beginTransaction();
+        layer.getFeatures().clear();
+        layer.getFeatures().addAll(features);
+        realm.commitTransaction();
     }
 
 }
