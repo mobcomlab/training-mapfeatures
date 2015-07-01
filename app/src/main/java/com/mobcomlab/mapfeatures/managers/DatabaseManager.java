@@ -25,6 +25,22 @@ public class DatabaseManager {
         return Realm.getInstance(context).where(Layer.class).equalTo("id", id).findFirst();
     }
 
+    public void updateLayer(String id, String name) {
+        Layer layer = getLayer(id);
+
+        Realm realm = Realm.getInstance(context);
+        realm.beginTransaction();
+
+        if (layer == null) {
+            layer = realm.createObject(Layer.class);
+        }
+
+        layer.setId(id);
+        layer.setName(name);
+
+        realm.commitTransaction();
+    }
+
     public List<Feature> getFeatures(String layerID) {
         return getLayer(layerID).getFeatures();
     }

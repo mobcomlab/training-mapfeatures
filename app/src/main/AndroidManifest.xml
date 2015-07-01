@@ -41,6 +41,14 @@
             android:name=".MapActivity"
             android:label="@string/title_activity_map" >
         </activity>
+        <activity
+            android:name=".FeatureActivity"
+            android:label="@string/title_activity_feature" >
+        </activity>
+        <activity
+            android:name=".LayerEditActivity"
+            android:label="@string/title_activity_layer_edit" >
+        </activity>
     </application>
 
 </manifest>

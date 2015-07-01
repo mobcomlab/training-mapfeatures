@@ -3,13 +3,18 @@ package com.mobcomlab.mapfeatures;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mobcomlab.mapfeatures.adapters.FeatureAdapter;
 import com.mobcomlab.mapfeatures.managers.DatabaseManager;
 import com.mobcomlab.mapfeatures.models.Layer;
 
 public class LayerActivity extends AppCompatActivity {
+
+    private Layer layer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,10 +22,19 @@ public class LayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_layer);
 
         final String layerId = getIntent().getStringExtra("layerId");
-        final Layer layer = new DatabaseManager(this)
+        layer = new DatabaseManager(this)
                 .getLayer(layerId);
 
-        // Bind data
+        // Setup recycler view
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new FeatureAdapter(this, layer.getFeatures()));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         getSupportActionBar().setTitle(layer.getName());
     }
 
@@ -38,8 +52,10 @@ public class LayerActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_edit_layer) {
+            Intent intent = new Intent(this, LayerEditActivity.class);
+            intent.putExtra("layerID", layer.getId());
+            startActivity(intent);
             return true;
         }
 

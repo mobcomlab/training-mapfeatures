@@ -3,6 +3,10 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_edit_layer">Edit layer</string>
+    <string name="action_add_layer">Add layer</string>
     <string name="title_activity_layer">LayerActivity</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_feature">FeatureActivity</string>
+    <string name="title_activity_layer_edit">Layer</string>
 </resources>
