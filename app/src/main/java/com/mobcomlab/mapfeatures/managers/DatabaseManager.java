@@ -3,11 +3,13 @@ package com.mobcomlab.mapfeatures.managers;
 import android.content.Context;
 import android.util.Pair;
 
+import com.mobcomlab.mapfeatures.models.Coordinate;
 import com.mobcomlab.mapfeatures.models.Feature;
 import com.mobcomlab.mapfeatures.models.Layer;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
@@ -58,7 +60,14 @@ public class DatabaseManager {
 
         feature.setId(id);
 
-
+        ArrayList<Coordinate> coordinatesNew = new ArrayList<>();
+        for (Pair<Double,Double> pair: coordinates) {
+            Coordinate coord = realm.createObject(Coordinate.class);
+            coord.setLatitude(pair.first.floatValue());
+            coord.setLongitude(pair.second.floatValue());
+            coordinatesNew.add(coord);
+        }
+        feature.getCoordinates().addAll(coordinatesNew);
 
         realm.commitTransaction();
 
