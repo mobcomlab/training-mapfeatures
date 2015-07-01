@@ -37,7 +37,7 @@ public class WebServiceManager {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i("WebServiceManager", "Response: " + response.toString());
-                    
+
                         handleLayerResponse(response);
 
                         listener.onWebServiceCallback();
@@ -67,7 +67,19 @@ public class WebServiceManager {
 
                 JSONObject feature = features.getJSONObject(i);
                 String id = feature.getString("id");
-                Log.i("featureId", id);
+
+                JSONObject geometry = feature.getJSONObject("geometry");
+                String geometryType = geometry.getString("type");
+
+                JSONArray coordinates = new JSONArray();
+                if (geometryType.equals("MultiLineString")) {
+                    coordinates = geometry.getJSONArray("coordinates").getJSONArray(0);
+                } else if (geometryType.equals("MultiPolygon")) {
+                    coordinates = geometry.getJSONArray("coordinates").getJSONArray(0).getJSONArray(0);
+                } else if (geometryType.equals("Point")) {
+                    coordinates = geometry.getJSONArray("coordinates");
+                }
+                Log.i("coordinates", coordinates.toString());
             }
         } catch (JSONException e) {
             e.printStackTrace();
