@@ -1,5 +1,6 @@
 package com.mobcomlab.mapfeatures;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_simple_map_overlay) {
+            startActivity(new Intent(this, SimpleMapOverlayActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

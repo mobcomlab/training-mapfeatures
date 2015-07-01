@@ -41,6 +41,14 @@
             android:name=".MapActivity"
             android:label="@string/title_activity_map" >
         </activity>
+        <activity
+            android:name=".SimpleMapOverlayActivity"
+            android:label="@string/title_activity_simple_map_overlay"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mobcomlab.mapfeatures.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
