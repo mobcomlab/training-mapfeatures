@@ -31,4 +31,5 @@ public class Coordinate extends RealmObject {
     public void setOrderIndex(int orderIndex) {
         this.orderIndex = orderIndex;
     }
+
 }
