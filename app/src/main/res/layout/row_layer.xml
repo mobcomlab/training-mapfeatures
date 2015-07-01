@@ -30,5 +30,19 @@
         android:paddingTop="18dp"
         android:textSize="18sp"
         tools:text="Forests" />
+    <TextView
+        android:id="@+id/geometry_type_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name_view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="start|bottom"
+        android:maxLines="1"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="14sp"
+        tools:text="Type" />
 
 </RelativeLayout>

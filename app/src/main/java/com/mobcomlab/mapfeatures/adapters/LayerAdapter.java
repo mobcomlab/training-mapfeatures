@@ -21,11 +21,13 @@ public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.ViewHolder> 
 
         public final TextView nameView;
         public final TextView featuresView;
+        public final TextView featureTypeView;
 
         public ViewHolder(final View itemView) {
             super(itemView);
             nameView = (TextView) itemView.findViewById(R.id.name_view);
             featuresView = (TextView) itemView.findViewById(R.id.features_view);
+            featureTypeView = (TextView) itemView.findViewById(R.id.geometry_type_view);
         }
     }
 
@@ -51,6 +53,7 @@ public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.ViewHolder> 
         // Bind data
         holder.nameView.setText(layer.getName());
         holder.featuresView.setText(String.valueOf(layer.getFeatures().size()));
+        holder.featureTypeView.setText(layer.getFeatureType());
 
         // Clicks
         holder.itemView.setOnClickListener(new View.OnClickListener() {
