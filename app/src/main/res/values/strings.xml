@@ -7,10 +7,7 @@
     <string name="action_add_layer">Add layer</string>
     <string name="title_activity_layer">LayerActivity</string>
     <string name="title_activity_map">MapActivity</string>
-<<<<<<< HEAD
     <string name="title_activity_simple_map_overlay">SimpleMapOverlayActivity</string>
-=======
     <string name="title_activity_feature">FeatureActivity</string>
     <string name="title_activity_layer_edit">Layer</string>
->>>>>>> origin/master
 </resources>
