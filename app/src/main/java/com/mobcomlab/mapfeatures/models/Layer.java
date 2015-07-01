@@ -9,6 +9,7 @@ public class Layer extends RealmObject {
     @PrimaryKey
     private String id;
     private String name;
+    private String featureType;
     private RealmList<Feature> features;
 
 
@@ -26,6 +27,14 @@ public class Layer extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFeatureType() {
+        return featureType;
+    }
+
+    public void setFeatureType(String featureType) {
+        this.featureType = featureType;
     }
 
     public RealmList<Feature> getFeatures() {
