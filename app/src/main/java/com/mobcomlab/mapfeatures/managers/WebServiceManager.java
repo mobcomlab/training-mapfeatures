@@ -77,7 +77,7 @@ public class WebServiceManager {
                 } else if (geometryType.equals("MultiPolygon")) {
                     coordinates = geometry.getJSONArray("coordinates").getJSONArray(0).getJSONArray(0);
                 } else if (geometryType.equals("Point")) {
-                    coordinates = geometry.getJSONArray("coordinates");
+                    coordinates = new JSONArray(String.format("[%s]", geometry.getJSONArray("coordinates").toString()));
                 }
                 Log.i("coordinates", coordinates.toString());
             }
