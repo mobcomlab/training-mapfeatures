@@ -5,4 +5,6 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_simple_map_overlay" android:title="Simple map oevrlay"
         android:orderInCategory="101" app:showAsAction="never" />
+    <item android:id="@+id/action_pull_data" android:title="Pull data"
+        android:orderInCategory="101" app:showAsAction="never" />
 </menu>

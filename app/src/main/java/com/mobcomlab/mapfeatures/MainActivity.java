@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import com.mobcomlab.mapfeatures.adapters.LayerAdapter;
 import com.mobcomlab.mapfeatures.managers.BundledData;
 import com.mobcomlab.mapfeatures.managers.DatabaseManager;
+import com.mobcomlab.mapfeatures.managers.WebServiceCallbackListener;
+import com.mobcomlab.mapfeatures.managers.WebServiceManager;
 import com.mobcomlab.mapfeatures.models.Layer;
 
 import java.util.List;
@@ -62,8 +64,22 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LayerEditActivity.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.action_simple_map_overlay) {
+        }
+        else if (id == R.id.action_simple_map_overlay) {
             startActivity(new Intent(this, SimpleMapOverlayActivity.class));
+        }
+        else if (id == R.id.action_pull_data) {
+            new WebServiceManager(this, new WebServiceCallbackListener() {
+                @Override
+                public void onWebServiceCallback() {
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
+
+                @Override
+                public void onWebServiceFailed() {
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
+            }).requestLayers();
         }
 
         return super.onOptionsItemSelected(item);

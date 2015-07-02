@@ -30,7 +30,7 @@ public class WebServiceManager {
 
     private final static String SERVER = "http://www2.cgistln.nu.ac.th/geoserver/";
     private final static String LAYERS_URL = SERVER+"wfs?request=GetCapabilities&version=1.0.0";
-    private final static String FEATURES_URL = SERVER+"wfs?request=GetFeature&version=1.0.0&typeName=%s&maxFeatures=1000&outputFormat=json";
+    private final static String FEATURES_URL = SERVER+"wfs?request=GetFeature&version=1.0.0&typeName=%s&maxFeatures=200&outputFormat=json";
 
     final Context context;
     final WebServiceCallbackListener listener;

@@ -51,9 +51,9 @@ public class LayerAdapter extends RecyclerView.Adapter<LayerAdapter.ViewHolder> 
         final Layer layer = data.get(position);
 
         // Bind data
-        holder.nameView.setText(layer.getName());
-        holder.featuresView.setText(String.valueOf(layer.getFeatures().size()));
-        holder.featureTypeView.setText(layer.getDescription());
+        holder.nameView.setText(layer.getId());
+        holder.featuresView.setText(layer.getFeatures().size() > 0 ? String.valueOf(layer.getFeatures().size()) : "-");
+        holder.featureTypeView.setText(layer.getName());
 
 
 
