@@ -9,7 +9,9 @@ public class Feature extends RealmObject {
     @PrimaryKey
     private String id;
     private String name;
+    private String type;
     private RealmList<Coordinate> coordinates;
+    private RealmList<Property> properties;
 
     public String getId() {
         return id;
@@ -27,11 +29,27 @@ public class Feature extends RealmObject {
         this.name = name;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public RealmList<Coordinate> getCoordinates() {
         return coordinates;
     }
 
     public void setCoordinates(RealmList<Coordinate> coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public RealmList<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(RealmList<Property> properties) {
+        this.properties = properties;
     }
 }

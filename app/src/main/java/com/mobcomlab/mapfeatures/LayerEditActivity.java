@@ -48,7 +48,7 @@ public class LayerEditActivity extends ActionBarActivity {
         String id = idText.getText().toString();
         String name = nameText.getText().toString();
 
-        new DatabaseManager(this).createOrUpdateLayer(id, name);
+        new DatabaseManager(this).createOrUpdateLayer(id, name, "");
 
         finish();
     }
