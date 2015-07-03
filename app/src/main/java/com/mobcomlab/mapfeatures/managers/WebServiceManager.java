@@ -9,10 +9,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mobcomlab.mapfeatures.models.Feature;
-import com.mobcomlab.mapfeatures.models.Layer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,9 +19,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.StringReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 
 public class WebServiceManager {
@@ -44,7 +40,7 @@ public class WebServiceManager {
 
     public void requestLayers() {
         Log.i("WebServiceManager", LAYERS_URL);
-        StringRequest request = new StringRequest(Request.Method.GET, LAYERS_URL, new Response.Listener<String>() {
+        Utf8StringRequest request = new Utf8StringRequest(Request.Method.GET, LAYERS_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 handleLayersResponse(response);
@@ -87,6 +83,7 @@ public class WebServiceManager {
     }
 
     private void handleLayersResponse(String response) {
+        Log.i("XML response", response);
         DatabaseManager databaseManager = new DatabaseManager(context);
         String layerId = null;
         String title = null;
