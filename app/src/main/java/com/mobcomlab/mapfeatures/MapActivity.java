@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.PolyUtil;
 import com.mobcomlab.mapfeatures.managers.DatabaseManager;
 import com.mobcomlab.mapfeatures.managers.WebServiceCallbackListener;
 import com.mobcomlab.mapfeatures.managers.WebServiceManager;
@@ -26,6 +27,7 @@ import com.mobcomlab.mapfeatures.models.Coordinate;
 import com.mobcomlab.mapfeatures.models.Feature;
 import com.mobcomlab.mapfeatures.models.Layer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +70,28 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
                 Intent intent = new Intent(MapActivity.this, PropertiesActivity.class);
                 intent.putExtra("featureId", marker.getTitle());
                 startActivity(intent);
+            }
+        });
+
+        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                for (Feature f: layer.getFeatures()) {
+                    if (f.getType() == "Point") {
+                        return;
+                    }
+                    ArrayList<LatLng> coords = new ArrayList<LatLng>();
+                    for (Coordinate c: f.getCoordinates()) {
+                        coords.add(new LatLng(c.getLatitude(), c.getLongitude()));
+                    }
+                    if (PolyUtil.containsLocation(latLng, coords, false)) {
+                        // Show activity
+                        Intent intent = new Intent(MapActivity.this, PropertiesActivity.class);
+                        intent.putExtra("featureId", f.getId());
+                        startActivity(intent);
+                        return;
+                    }
+                }
             }
         });
 
