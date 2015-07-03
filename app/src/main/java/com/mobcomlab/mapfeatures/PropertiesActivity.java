@@ -29,6 +29,9 @@ public class PropertiesActivity extends AppCompatActivity {
         Feature feature = new DatabaseManager(this).getFeature(featureId);
         List<Property> properties = feature.getProperties();
 
+        // Setup action bar
+        getSupportActionBar().setTitle(feature.getId());
+
         // Setup recycler
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BundledData.clearDatabase(this);
+        //BundledData.clearDatabase(this);
         BundledData.populateDatabase(this);
 
         layers = new DatabaseManager(this).getLayers();

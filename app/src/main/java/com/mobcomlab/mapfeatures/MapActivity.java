@@ -35,6 +35,7 @@ import io.realm.RealmList;
 public class MapActivity extends ActionBarActivity implements OnMapReadyCallback, WebServiceCallbackListener {
 
     String layerId;
+    Layer layer;
     private GoogleMap map;
     LatLngBounds.Builder bounds;
 
@@ -45,6 +46,10 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
 
         // Get the layer id
         layerId = getIntent().getStringExtra("layerId");
+        layer = new DatabaseManager(this).getLayer(layerId);
+
+        // Setup action bar
+        getSupportActionBar().setTitle(layer.getName());
 
         // Setup map fragment
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -82,7 +87,6 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         bounds = new LatLngBounds.Builder();
 
         // Add all the features
-        Layer layer = new DatabaseManager(this).getLayer(layerId);
         for (int i = 0; i < layer.getFeatures().size(); i++) {
             Feature feature = layer.getFeatures().get(i);
             drawMapOverlay(feature);
