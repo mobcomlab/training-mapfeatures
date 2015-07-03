@@ -1,5 +1,6 @@
 package com.mobcomlab.mapfeatures;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -25,6 +27,7 @@ import com.mobcomlab.mapfeatures.models.Feature;
 import com.mobcomlab.mapfeatures.models.Layer;
 
 import java.util.List;
+import java.util.Map;
 
 import io.realm.RealmList;
 
@@ -54,6 +57,15 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         map.getUiSettings().setZoomControlsEnabled(true);
 
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(MapActivity.this, PropertiesActivity.class);
+                intent.putExtra("featureId", marker.getTitle());
+                startActivity(intent);
+            }
+        });
+
         refreshMap();
 
         // Call web service to get features
@@ -73,7 +85,7 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         Layer layer = new DatabaseManager(this).getLayer(layerId);
         for (int i = 0; i < layer.getFeatures().size(); i++) {
             Feature feature = layer.getFeatures().get(i);
-            drawMapOverlay(feature.getType(), feature.getCoordinates());
+            drawMapOverlay(feature);
         }
 
         // Zoom to bounds
@@ -83,23 +95,26 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
         }
     }
 
-    private void drawMapOverlay(String featureType, List<Coordinate> coordinates) {
-        if (featureType.equalsIgnoreCase("Point")) {
-            drawMarkers(coordinates);
+    private void drawMapOverlay(Feature feature) {
+        if (feature.getType().equalsIgnoreCase("Point")) {
+            String snippet = String.format("%d properties", feature.getProperties().size());
+            drawMarkers(feature.getId(), snippet, feature.getCoordinates());
         }
-        else if (featureType.equalsIgnoreCase("MultiLineString")) {
-            drawPolyline(coordinates);
+        else if (feature.getType().equalsIgnoreCase("MultiLineString")) {
+            drawPolyline(feature.getCoordinates());
         }
-        else if (featureType.equalsIgnoreCase("MultiPolygon")) {
-            drawPolygon(coordinates);
+        else if (feature.getType().equalsIgnoreCase("MultiPolygon")) {
+            drawPolygon(feature.getCoordinates());
         }
     }
 
-    private void drawMarkers(List<Coordinate> coordinates) {
+    private void drawMarkers(String title, String snippet, List<Coordinate> coordinates) {
         // Add markers to map
         for (int i = 0; i < coordinates.size(); i++) {
             Coordinate coord = coordinates.get(i);
             MarkerOptions marker = new MarkerOptions();
+            marker.title(title);
+            marker.snippet(snippet);
             marker.position(new LatLng(coord.getLatitude(), coord.getLongitude()));
             bounds.include(marker.getPosition());
             map.addMarker(marker);

@@ -108,4 +108,7 @@ public class DatabaseManager {
         realm.commitTransaction();
     }
 
+    public Feature getFeature(String id) {
+        return Realm.getInstance(context).where(Feature.class).equalTo("id", id).findFirst();
+    }
 }
