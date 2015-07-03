@@ -60,7 +60,7 @@ public class WebServiceManager {
     public void requestFeatures(final String layerId) {
         String url = String.format(FEATURES_URL, layerId);
         Log.i("WebServiceManager", url);
-        JsonObjectRequest request = new JsonObjectRequest
+        Utf8JsonObjectRequest request = new Utf8JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
